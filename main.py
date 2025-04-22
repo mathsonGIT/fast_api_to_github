@@ -1,11 +1,12 @@
-from fastapi import FastAPI, HTTPException
-from database import engine, session
-from models import Recipe, Base
-from pydantic import BaseModel
-from typing import List
 from contextlib import asynccontextmanager
-from sqlalchemy import select
-from sqlalchemy import insert
+from typing import List
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from sqlalchemy import insert, select
+
+from database import engine, session
+from models import Base, Recipe
 
 
 class RecipeCreate(BaseModel):
