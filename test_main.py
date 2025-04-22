@@ -1,7 +1,8 @@
 import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
-from main import app  # Adjust the import based on your app's structure
+from main import app
+
 
 @pytest.mark.asyncio
 async def test_create_recipe():
