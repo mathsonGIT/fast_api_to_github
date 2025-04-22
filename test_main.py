@@ -12,10 +12,10 @@ async def test_create_recipe():
                 "title": "Test Recipe",
                 "cooking_time": 30,
                 "ingredients": "Test ingredients",
-                "description": "Test description"
-            }
+                "description": "Test description",
+            },
         )
-        
+
         assert response.status_code == 200
         data = response.json()
         assert "id" in data
