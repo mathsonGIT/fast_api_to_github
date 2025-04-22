@@ -1,8 +1,8 @@
+black
+isort
+flake8
 pytest-asyncio
 fastapi
 uvicorn
 pytest
-black
-isort
-flake8
 httpx
