@@ -14,4 +14,3 @@ class Recipe(Base):
 
     def __repr__(self):
         return f"<Recipe(title={self.title}, views={self.views}, cooking_time={self.cooking_time})>"
-    

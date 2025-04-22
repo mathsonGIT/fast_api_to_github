@@ -35,6 +35,7 @@ async def lifespan(app: FastAPI):
     await session.close()
     await engine.dispose()
 
+
 app = FastAPI(lifespan=lifespan)
 
 
@@ -43,7 +44,9 @@ async def get_recipes(limit: int = 10):
     """
     Получить список всех рецептов, отсортированных по количеству просмотров и времени приготовления.
     """
-    query = select(Recipe).order_by(Recipe.views.desc(), Recipe.cooking_time).limit(limit)
+    query = (
+        select(Recipe).order_by(Recipe.views.desc(), Recipe.cooking_time).limit(limit)
+    )
     result = await session.execute(query)
     return result.scalars().all()
 
