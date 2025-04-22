@@ -1,11 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from sqlalchemy.orm import Session
 from database import engine, session
 from models import Recipe, Base
 from pydantic import BaseModel
 from typing import List
 from contextlib import asynccontextmanager
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy import insert
 
@@ -15,6 +13,7 @@ class RecipeCreate(BaseModel):
     cooking_time: int
     ingredients: str
     description: str
+
 
 class RecipeResponse(BaseModel):
     id: int
@@ -27,6 +26,7 @@ class RecipeResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
@@ -38,7 +38,6 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-
 @app.get("/recipes", response_model=List[RecipeResponse])
 async def get_recipes(limit: int = 10):
     """
@@ -47,6 +46,7 @@ async def get_recipes(limit: int = 10):
     query = select(Recipe).order_by(Recipe.views.desc(), Recipe.cooking_time).limit(limit)
     result = await session.execute(query)
     return result.scalars().all()
+
 
 @app.get("/recipes/{recipe_id}", response_model=RecipeResponse)
 async def get_recipe(recipe_id: int):
@@ -59,6 +59,7 @@ async def get_recipe(recipe_id: int):
     if recipe is None:
         raise HTTPException(status_code=404, detail="Recipe not found")
     return recipe
+
 
 @app.post("/recipes", response_model=RecipeResponse)
 async def create_recipe(recipe: RecipeCreate):
