@@ -1,7 +1,8 @@
-import pytest_asyncio
 import pytest
-from database import engine, Base
-from httpx import AsyncClient, ASGITransport
+import pytest_asyncio
+from httpx import ASGITransport, AsyncClient
+
+from database import Base, engine
 from main import app
 
 

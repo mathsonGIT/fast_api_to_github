@@ -1,13 +1,13 @@
 from contextlib import asynccontextmanager
 from typing import List
 
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-from database import engine, Base, Recipe
+from database import Base, Recipe, engine
 
 # Create a new sessionmaker for each request
 async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
