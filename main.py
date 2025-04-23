@@ -5,8 +5,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import insert, select
 
-from database import engine, session
-from models import Base, Recipe
+from database import engine, session, Base, Recipe
 
 
 class RecipeCreate(BaseModel):
