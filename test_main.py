@@ -7,4 +7,3 @@ def test_create_recipe():
     client = TestClient(app)
     response = client.get("/recipes")
     assert response.status_code == 200
-    
