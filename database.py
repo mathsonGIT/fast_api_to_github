@@ -29,7 +29,7 @@ class Recipe(Base):
 
     def __repr__(self):
         return f"<Recipe(title={self.title}, views={self.views}, cooking_time={self.cooking_time})>"
-    
+
 
 async def init_db():
     async with engine.begin() as conn:
@@ -44,14 +44,21 @@ async def add_recipe(title, views, cooking_time, ingredients, description):
                 views=views,
                 cooking_time=cooking_time,
                 ingredients=ingredients,
-                description=description
+                description=description,
             )
             session.add(new_recipe)
 
 
 async def main():
     await init_db()
-    await add_recipe("Pasta", 100, 30, "Pasta, Tomato Sauce, Cheese", "Delicious pasta with tomato sauce.")
+    await add_recipe(
+        "Pasta",
+        100,
+        30,
+        "Pasta, Tomato Sauce, Cheese",
+        "Delicious pasta with tomato sauce.",
+    )
+
 
 if __name__ == "__main__":
     asyncio.run(main())
